@@ -1,0 +1,85 @@
+<!--
+创建时间 : 2018/06/17
+版本号 : V1
+文档名 : detail.html
+编辑人 : he_wm
+作 用 : 展示个人用户每次提交代码量
+源存储位置 : \\css_v1\\css_v1\\templates\\detail.html
+代码添加及修改说明:
+    修该说明 :
+        1、2018/04/03 : 
+        2、
+    添加说明 :
+        1、
+        2、
+-->
+
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="container" style="max-width:800px;height:400px"></div>
+<h3 class="inner-tittle two">用户上传代码详情</h3>
+<div class="graph">
+    <div class="tables">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>时间</th>
+                <th>行数</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for result in result_list %}
+            <tr>
+                <th scope="row">{{result.id}}</th>
+                <td>{{result.ctime}}</td>
+                <td>{{result.line}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div lis_time="{{lis_time}}" lis_lin="{{lis_lin}}" result_list="result_list" id='mytext'></div>
+</div>
+<script>
+    var mylis = document.getElementById("mytext");
+    var lis_time = JSON.parse(mylis.getAttribute("lis_time"));
+    var lis_lin = JSON.parse(mylis.getAttribute("lis_lin"));
+    var chart = Highcharts.chart('container', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: '代码书写量'
+        },
+        subtitle: {
+            text: '数据来源:mysql数据库'
+        },
+        xAxis: {
+            categories: lis_time
+        },
+        yAxis: {
+            title: {
+                text: '行数'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    // 开启数据标签
+                    enabled: true
+                },
+                // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+                enableMouseTracking: true
+            }
+        },
+        series: [{
+            name: '时间',
+            data: lis_lin
+        }]
+    });
+
+
+</script>
+{% endblock %}

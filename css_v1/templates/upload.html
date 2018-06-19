@@ -1,0 +1,32 @@
+<!--
+创建时间 : 2018/06/17
+版本号 : V1
+文档名 : upload.html
+编辑人 : he_wm
+作 用 : 展示上传代码界面
+源存储位置 : \\css_v1\\css_v1\\templates\\upload.html
+代码添加及修改说明:
+    修该说明 :
+        1、2018/04/03 : 
+        2、
+    添加说明 :
+        1、
+        2、
+-->
+
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>文件上传示例</h1>
+<div class="graph-form">
+    <div class="form-body">
+        <form action="" enctype='multipart/form-data' method='POST'>
+            <div class="form-group"><label for="exampleInputFile">File input</label> <input
+                    type="file" id="exampleInputFile" name="file">
+                <p class="help-block">Example block-level help text here.</p></div>
+            <div class="checkbox"><label> <input type="checkbox"> Check me out </label></div>
+            <input type="submit" class="btn btn-default" value="上传"/>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+<!--
+创建时间 : 2018/06/17
+版本号 : V1
+文档名 : user_list.html
+编辑人 : he_wm
+作 用 : 为用户展示所有所有用户写的代码总数
+源存储位置 : \\css_v1\\css_v1\\templates\\user_list.html
+代码添加及修改说明:
+    修该说明 :
+        1、2018/04/03 : 
+        2、
+    添加说明 :
+        1、
+        2、
+-->
+
+{% extends "layout.html" %}
+
+{% block content %}
+<h3 class="inner-tittle two">用户列表</h3>
+<div id="container" style="min-width:400px;height:400px"></div>
+<div class="graph">
+    <div class="tables">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>昵称</th>
+                <th>查看代码提交记录</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in data_list %}
+            <tr>
+                <th scope="row">{{data.id}}</th>
+                <td>{{data.user}}</td>
+                <td>{{data.nick}}</td>
+                <td><a href="/detail/{{data.id}}">点击查看</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div lis_lin="{{lis_lin}}" id="mytext"></div>
+    </div>
+</div>
+<script>
+    var mylis = document.getElementById("mytext");
+    var lis_lin = JSON.parse(mylis.getAttribute("lis_lin"));
+    console.log(lis_lin);
+    var chart = Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '个人代码量统计'
+        },
+        subtitle: {
+            text: '数据截止 今日'
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45  // 设置轴标签旋转角度
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '行数（行）'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '代码行数: <b>{point.y:.1f} 行</b>'
+        },
+        series: [{
+            name: '总人口',
+            data: lis_lin,
+            dataLabels: {
+                enabled: true,
+                rotation: -90,
+                color: '#FFFFFF',
+                align: 'right',
+                format: '{point.y:.1f}', // :.1f 为保留 1 位小数
+                y: 10
+            }
+        }]
+    });
+</script>
+{% endblock %}
