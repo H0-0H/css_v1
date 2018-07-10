@@ -119,6 +119,7 @@ def uplosd():
         return "今日已经上传"
     sql = 'insert into code(line, ctime,user_id) VALUES (%s,%s,%s)'
     helper.insert(sql, (total_num, ctime, session['user_info']['id']))
+    return redirect('/user_list')
 
 
 @ind.route('/user_list')

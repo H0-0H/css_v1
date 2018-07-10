@@ -24,7 +24,7 @@ class Manage():
     """
     SALT = b"sasa"  # md5盐配置
     SESSION_TYPE = "redis"
-    SESSION_REDIS = redis.Redis(host='192.168.131.129', port=6379, password='123456')
+    SESSION_REDIS = redis.Redis(host='127.0.0.1', port=6379)
     SECRET_KEY = "123fsdsafdadf"
     MAX_CONTENT_LENGTH = 1024 * 1024 * 7
     POOL = PooledDB(
